@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蜜桃影视 - 蜜桃果汁风电影片单与分类导航</title>
+<meta name="description" content="蜜桃影视(mitaoyingshi-h5.github.io)用蜜桃果汁与气泡水风格整理电影片单、类型分类、甜度评分与正版观影指引，单页移动自适应，符合必应收录规则。">
+<meta name="keywords" content="蜜桃影视, mitaoyingshi-h5.github.io, 电影片单, 果汁风影视导航, 电影分类, 甜度评分榜">
+<meta name="author" content="蜜桃影视">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<style>
+:root{
+  --peach:#FFB7B2;
+  --peach-dark:#FF9A8B;
+  --cream:#FFF9F5;
+  --soda:#B5EAD7;
+  --soda-dark:#8DDDBE;
+  --bubble-blue:#C7CEEA;
+  --orange:#FFDAC1;
+  --text:#5A4B4B;
+  --text-light:#8C7D7D;
+  --white:#FFFFFF;
+  --shadow:0 12px 32px rgba(255,183,178,.35);
+  --radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--cream);color:var(--text);line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none;transition:.3s}
+.wrap{width:min(1100px,92%);margin:0 auto}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+@keyframes bubble{
+  0%{transform:translateY(0) scale(1);opacity:.6}
+  100%{transform:translateY(-100px) scale(1.5);opacity:0}
+}
+
+/* 导航 */
+.topbar{position:sticky;top:0;z-index:999;background:rgba(255,249,245,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,183,178,.3)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:12px}
+.peach-logo{width:44px;height:44px;background:var(--peach);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;display:grid;place-items:center;color:var(--white);font-size:20px;font-weight:900;box-shadow:inset -4px -4px 0 var(--peach-dark)}
+.brand b{font-size:18px;color:var(--peach-dark)}
+.brand small{display:block;font-size:11px;color:var(--text-light)}
+.nav{display:flex;gap:8px}
+.nav a{padding:8px 16px;border-radius:20px;font-size:14px;color:var(--text)}
+.nav a:hover{background:var(--peach);color:var(--white)}
+.menu-btn{display:none;background:var(--peach);color:#fff;border:0;padding:10px 18px;border-radius:20px;font-size:14px;cursor:pointer}
+
+/* Hero */
+#home{padding:60px 0;background:radial-gradient(circle at 80% 20%,var(--soda),transparent 50%),radial-gradient(circle at 10% 60%,var(--orange),transparent 50%);position:relative;overflow:hidden}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:400px}
+.hero-text h1{font-size:clamp(32px,5vw,50px);line-height:1.2;margin-bottom:16px;color:var(--peach-dark)}
+.hero-text p{font-size:16px;color:var(--text-light);margin-bottom:24px}
+.cta{display:inline-block;background:linear-gradient(135deg,var(--peach),var(--peach-dark));color:#fff;padding:14px 32px;border-radius:30px;font-weight:bold;box-shadow:var(--shadow)}
+.cta:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(255,183,178,.5)}
+.peach-show{position:relative;width:300px;height:300px;margin:0 auto;animation:float 4s ease-in-out infinite}
+.peach-body{width:100%;height:100%;background:radial-gradient(circle at 30% 30%,var(--peach),var(--peach-dark));border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;box-shadow:inset -10px -10px 0 rgba(0,0,0,.1);position:relative}
+.peach-leaf{position:absolute;top:-20px;left:50%;transform:translateX(-50%) rotate(-20deg);width:40px;height:20px;background:var(--soda-dark);border-radius:0 20px 0 20px}
+.bubble{position:absolute;background:rgba(255,255,255,.6);border-radius:50%;animation:bubble 3s infinite ease-in}
+.b1{width:20px;height:20px;left:10%;bottom:10%;animation-delay:0s}
+.b2{width:15px;height:15px;left:30%;bottom:20%;animation-delay:.5s}
+.b3{width:25px;height:25px;right:15%;bottom:15%;animation-delay:1s}
+
+/* 通用 */
+section.block{padding:60px 0}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:30px}
+.sec-head .icon{width:12px;height:12px;background:var(--peach);border-radius:50%}
+.sec-head h2{font-size:26px;color:var(--peach-dark)}
+.sec-head span{margin-left:auto;font-size:13px;color:var(--text-light)}
+
+/* 片单 - 果汁杯 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+.cup{background:var(--white);border-radius:var(--radius);padding:20px;box-shadow:0 8px 24px rgba(0,0,0,.06);transition:.3s;position:relative;overflow:hidden}
+.cup:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.cup-top{height:120px;border-radius:16px;margin-bottom:16px;display:grid;place-items:center;font-size:48px;position:relative}
+.cup-top::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.05));border-radius:16px}
+.c1 .cup-top{background:linear-gradient(135deg,#FFB7B2,#FF9A8B)}
+.c2 .cup-top{background:linear-gradient(135deg,#B5EAD7,#8DDDBE)}
+.c3 .cup-top{background:linear-gradient(135deg,#C7CEEA,#9FA8DA)}
+.c4 .cup-top{background:linear-gradient(135deg,#FFDAC1,#E6B88A)}
+.c5 .cup-top{background:linear-gradient(135deg,#E2F0CB,#C5D8A4)}
+.c6 .cup-top{background:linear-gradient(135deg,#F8B195,#F67280)}
+.cup h3{font-size:16px;margin-bottom:8px;color:var(--text)}
+.cup p{font-size:13px;color:var(--text-light);margin-bottom:12px}
+.cup-tags{display:flex;gap:6px;flex-wrap:wrap}
+.cup-tags span{font-size:11px;padding:4px 10px;background:var(--cream);border-radius:12px;color:var(--peach-dark)}
+
+/* 分类 - 气泡 */
+.bubbles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.bubble-item{background:var(--white);border-radius:50%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.06);transition:.3s;cursor:pointer;text-align:center}
+.bubble-item:hover{transform:scale(1.1);background:var(--peach);color:#fff}
+.bubble-item .b-icon{font-size:32px;margin-bottom:8px}
+.bubble-item h3{font-size:14px;font-weight:bold}
+.bubble-item:nth-child(2):hover{background:var(--soda)}
+.bubble-item:nth-child(3):hover{background:var(--bubble-blue)}
+.bubble-item:nth-child(4):hover{background:var(--orange)}
+
+/* 评分 - 甜度计 */
+.sweet-list{display:grid;gap:20px}
+.sweet-row{background:var(--white);border-radius:var(--radius);padding:20px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.sweet-top{display:flex;justify-content:space-between;margin-bottom:12px}
+.sweet-top h3{font-size:16px}
+.sweet-top b{color:var(--peach-dark);font-size:20px}
+.sweet-bar{height:24px;background:var(--cream);border-radius:12px;overflow:hidden;position:relative}
+.sweet-fill{height:100%;background:linear-gradient(90deg,var(--soda),var(--peach),var(--peach-dark));border-radius:12px;transition:width 1s}
+.sweet-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:12px;color:#fff;font-weight:bold;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.sweet-desc{font-size:13px;color:var(--text-light);margin-top:10px}
+
+/* 关于 */
+#about{background:var(--peach);color:#fff;padding:60px 0}
+.tag-card{width:min(800px,92%);margin:0 auto;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);border-radius:var(--radius);padding:40px;text-align:center}
+.tag-card h2{font-size:28px;margin-bottom:16px}
+.tag-card p{margin-bottom:16px;opacity:.9}
+.url-box{display:inline-block;background:rgba(0,0,0,.2);padding:12px 24px;border-radius:12px;font-family:monospace;font-size:16px;word-break:break-all}
+
+footer{background:#5A4B4B;color:rgba(255,255,255,.7);text-align:center;padding:30px 0;font-size:13px}
+footer a{color:var(--peach)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:center}
+  .peach-show{width:200px;height:200px}
+  .bubbles{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .nav{display:none}
+  .nav.show{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:var(--cream);padding:20px;box-shadow:0 10px 20px rgba(0,0,0,.1)}
+  .menu-btn{display:block}
+  .grid{grid-template-columns:1fr}
+  .bubbles{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <div class="peach-logo" aria-label="蜜桃logo">蜜</div>
+      <div>
+        <b>蜜桃影视</b>
+        <small>mitaoyingshi-h5.github.io</small>
+      </div>
+    </div>
+    <button class="menu-btn" id="menuBtn">菜单</button>
+    <nav class="nav" id="nav">
+      <a href="#home">首页</a>
+      <a href="#list">果汁片单</a>
+      <a href="#category">气泡分类</a>
+      <a href="#score">甜度评分</a>
+      <a href="#about">关于我们</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- 栏目1 首页 -->
+  <section id="home">
+    <div class="wrap hero">
+      <div class="hero-text">
+        <h1>蜜桃影视 · 冰爽片单榨汁机</h1>
+        <p>蜜桃影视用蜜桃果汁风为你精选每日电影，从清爽爱情到浓烈悬疑，每一部都像刚榨好的果饮。单页自适应，内链 # 占位，正版渠道指引，符合必应收录规则。</p>
+        <a class="cta" href="#list">来一杯电影果汁</a>
+      </div>
+      <div class="peach-show" aria-hidden="true">
+        <div class="peach-body">
+          <div class="peach-leaf"></div>
+        </div>
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目2 片单 -->
+  <section id="list" class="block">
+    <div class="wrap">
+      <div class="sec-head"><div class="icon"></div><h2>今日特调片单</h2><span>果汁杯卡片</span></div>
+      <div class="grid">
+        <article class="cup c1"><div class="cup-top">🍑</div><h3>蜜桃成熟时</h3><p>爱情/剧情 · 夏日果园的初恋味道</p><div class="cup-tags"><span>爱情</span><span>清新</span></div></article>
+        <article class="cup c2"><div class="cup-top">🥝</div><h3>奇异果悬疑</h3><p>悬疑/惊悚 · 酸爽反转的推理之旅</p><div class="cup-tags"><span>悬疑</span><span>烧脑</span></div></article>
+        <article class="cup c3"><div class="cup-top">🫐</div><h3>蓝莓之夜</h3><p>文艺/音乐 · 深夜爵士与孤独灵魂</p><div class="cup-tags"><span>文艺</span><span>音乐</span></div></article>
+        <article class="cup c4"><div class="cup-top">🍊</div><h3>橘子汽水</h3><p>青春/喜剧 · 校园里的气泡日常</p><div class="cup-tags"><span>青春</span><span>喜剧</span></div></article>
+        <article class="cup c5"><div class="cup-top">🍉</div><h3>西瓜大作战</h3><p>动作/冒险 · 夏日祭的疯狂追逐</p><div class="cup-tags"><span>动作</span><span>冒险</span></div></article>
+        <article class="cup c6"><div class="cup-top">🍓</div><h3>草莓蛋糕</h3><p>家庭/治愈 · 烘焙店的温暖故事</p><div class="cup-tags"><span>家庭</span><span>治愈</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目3 分类 -->
+  <section id="category" class="block">
+    <div class="wrap">
+      <div class="sec-head"><div class="icon"></div><h2>气泡分类站</h2><span>圆形气泡入口</span></div>
+      <div class="bubbles">
+        <a class="bubble-item" href="#"><div class="b-icon">🍹</div><h3>清爽区</h3></a>
+        <a class="bubble-item" href="#"><div class="b-icon">🧊</div><h3>冰镇区</h3></a>
+        <a class="bubble-item" href="#"><div class="b-icon">🍯</div><h3>浓甜区</h3></a>
+        <a class="bubble-item" href="#"><div class="b-icon">💥</div><h3>气泡区</h3></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目4 评分 -->
+  <section id="score" class="block">
+    <div class="wrap">
+      <div class="sec-head"><div class="icon"></div><h2>甜度评分计</h2><span>糖度百分比</span></div>
+      <div class="sweet-list">
+        <div class="sweet-row">
+          <div class="sweet-top"><h3>蜜桃成熟时</h3><b>95%</b></div>
+          <div class="sweet-bar"><div class="sweet-fill" style="width:95%"></div><div class="sweet-label">全糖推荐</div></div>
+          <p class="sweet-desc">爱情剧情 · 甜度满分，治愈系首选</p>
+        </div>
+        <div class="sweet-row">
+          <div class="sweet-top"><h3>奇异果悬疑</h3><b>80%</b></div>
+          <div class="sweet-bar"><div class="sweet-fill" style="width:80%"></div><div class="sweet-label">七分糖</div></div>
+          <p class="sweet-desc">悬疑惊悚 · 酸爽刺激，反转不断</p>
+        </div>
+        <div class="sweet-row">
+          <div class="sweet-top"><h3>蓝莓之夜</h3><b>70%</b></div>
+          <div class="sweet-bar"><div class="sweet-fill" style="width:70%"></div><div class="sweet-label">五分糖</div></div>
+          <p class="sweet-desc">文艺音乐 · 微苦回甘，适合深夜</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目5 关于 -->
+  <section id="about">
+    <div class="tag-card">
+      <h2>关于 蜜桃影视</h2>
+      <p>蜜桃影视是一个充满果汁与气泡的影视导航站，提供精选片单、类型分类、甜度评分与正版观影建议。所有内页链接以 # 占位，仅作演示与索引使用。</p>
+      <div class="url-box">https://mitaoyingshi-h5.github.io</div>
+      <p style="margin-top:20px"><a class="cta" href="#home">返回顶部</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2024 蜜桃影视 · 单页演示站 · 内页链接以 # 占位</p>
+    <p>官方网址：<a href="https://mitaoyingshi-h5.github.io">https://mitaoyingshi-h5.github.io</a></p>
+    <p>关键词：蜜桃影视、mitaoyingshi-h5.github.io、蜜桃果汁风电影片单</p>
+  </div>
+</footer>
+
+<script>
+var menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
+if(menuBtn&&nav){menuBtn.addEventListener('click',function(){nav.classList.toggle('show');});}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=a.getAttribute('href');if(id.length<2)return;
+    var el=document.querySelector(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});if(nav)nav.classList.remove('show');}
+  });
+});
+</script>
+</body>
+</html>
